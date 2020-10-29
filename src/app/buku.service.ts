@@ -7,9 +7,14 @@ import { Buku } from './buku';
 })
 export class BukuService {
   constructor(private http: HttpClient) {}
+
   get(id: string) {
     return this.http.get<Buku>(
       'https://universitas-terbuka-bot.herokuapp.com/pustaka/book/' + id
     );
+  }
+
+  public get myBook(): any[] {
+    return [{ id: 'BING330102', cols: 1, rows: 1 }];
   }
 }
