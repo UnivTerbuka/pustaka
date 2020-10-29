@@ -5,6 +5,7 @@ export interface Modul {
   nama?: string;
   subfolder: string;
   url?: string;
+  page?: number;
 }
 
 export enum Form {

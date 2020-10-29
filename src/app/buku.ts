@@ -7,4 +7,5 @@ export interface Buku {
   thumbUrl?: string;
   initial?: boolean;
   modul?: Modul[];
+  current?: string;
 }
