@@ -1,1 +1,3 @@
-<p>reader works!</p>
+<div [ngStyle]="{ 'background-image': image }">
+  <p>{{ content$ | async }}</p>
+</div>

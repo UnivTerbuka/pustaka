@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Buku } from './buku';
 
@@ -27,7 +27,7 @@ export class BukuService {
   }
 
   get_image(id: string, modul: string, page: number = 1) {
-    return this.http.get<string>(
+    return this.http.get<HttpResponse<string>>(
       `https://universitas-terbuka-bot.herokuapp.com/pustaka/img/${id}/${modul}/${page}`
     );
   }

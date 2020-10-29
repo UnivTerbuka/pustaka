@@ -14,7 +14,7 @@
       mat-list-item
       class="modul-list"
       *ngFor="let modul of buku.modul"
-      (click)="openModul(modul.doc)"
+      [routerLink]="['/read', id, modul.doc, 1]"
     >
       <mat-icon mat-list-icon>book</mat-icon>
       <div mat-line>{{ modul.nama }}</div>

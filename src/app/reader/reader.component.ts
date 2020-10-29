@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { BukuService } from '../buku.service';
 
 @Component({
   selector: 'app-reader',
@@ -10,7 +13,27 @@ export class ReaderComponent implements OnInit {
   id: string;
   modul: string;
   page: number;
-  constructor(private route: ActivatedRoute) {}
+  _url: string;
+  content$: Observable<string>;
+  constructor(private route: ActivatedRoute, private service: BukuService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.content$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        this.id = params.get('id');
+        this.modul = params.get('modul');
+        this.page = Number(params.get('page'));
+        this.service
+          .get_image(this.id, this.modul, this.page)
+          .subscribe((data) => {
+            this._url = data.headers.get('location');
+          });
+        return this.service.get_text(this.id, this.modul, this.page);
+      })
+    );
+  }
+
+  public get image(): string {
+    return `url(${this._url})`;
+  }
 }
