@@ -23,6 +23,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
 import { BukuCardComponent } from './buku-card/buku-card.component';
 import { SearchBukuComponent } from './search-buku/search-buku.component';
+import { StoreModule } from '@ngrx/store';
 
 const material = [
   MatToolbarModule,
@@ -59,6 +60,7 @@ const material = [
     FormsModule,
     ReactiveFormsModule,
     ...material,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],
