@@ -1,6 +1,7 @@
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-title>
+      <mat-icon mat-list-icon>library_books</mat-icon>
       {{ id }}
     </mat-panel-title>
     <mat-panel-description>
@@ -9,10 +10,15 @@
   </mat-expansion-panel-header>
   <mat-list>
     <div mat-subheader>Modul</div>
-    <mat-list-item *ngFor="let modul of buku.modul">
+    <a
+      mat-list-item
+      class="modul-list"
+      *ngFor="let modul of buku.modul"
+      (click)="openModul(modul.doc)"
+    >
       <mat-icon mat-list-icon>book</mat-icon>
       <div mat-line>{{ modul.nama }}</div>
       <div mat-line>{{ modul.end }} halaman</div>
-    </mat-list-item>
+    </a>
   </mat-list>
 </mat-expansion-panel>

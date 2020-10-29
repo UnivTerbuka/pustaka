@@ -13,6 +13,10 @@ export class BukuCardComponent implements OnInit {
 
   constructor(private bukuService: BukuService) {}
 
+  openModul(modul: string) {
+    this.bukuService.open(this.id, modul);
+  }
+
   ngOnInit(): void {
     this.bukuService
       .get(this.id)
