@@ -1,0 +1,18 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{ buku.name || buku.id }}
+    </mat-panel-title>
+    <mat-panel-description>
+      {{ id }}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-list>
+    <div mat-subheader>Modul</div>
+    <mat-list-item *ngFor="let modul of buku.modul">
+      <mat-icon mat-list-icon>book</mat-icon>
+      <div mat-line>{{ modul.nama }}</div>
+      <div mat-line>{{ modul.end }} halaman</div>
+    </mat-list-item>
+  </mat-list>
+</mat-expansion-panel>

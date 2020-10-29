@@ -16,6 +16,8 @@ import { HomeComponent } from './home/home.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { BukuCardComponent } from './buku-card/buku-card.component';
 
 const material = [
   MatToolbarModule,
@@ -25,10 +27,21 @@ const material = [
   MatSidenavModule,
   MatIconModule,
   MatListModule,
+  MatGridListModule,
+  MatCardModule,
+  MatMenuModule,
+  MatIconModule,
+  MatButtonModule,
+  MatExpansionModule,
 ];
 
 @NgModule({
-  declarations: [AppComponent, NavigationComponent, HomeComponent],
+  declarations: [
+    AppComponent,
+    NavigationComponent,
+    HomeComponent,
+    BukuCardComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,11 +49,6 @@ const material = [
     HttpClientModule,
     LayoutModule,
     ...material,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

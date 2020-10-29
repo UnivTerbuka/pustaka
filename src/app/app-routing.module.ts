@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, data: { title: 'Pustaka' } },
+  { path: 'home', redirectTo: '/', pathMatch: 'full' },
 ];
 
 @NgModule({
