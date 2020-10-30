@@ -9,13 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -39,14 +34,9 @@ const material = [
   MatSidenavModule,
   MatIconModule,
   MatListModule,
-  MatGridListModule,
-  MatCardModule,
-  MatMenuModule,
   MatIconModule,
   MatButtonModule,
-  MatAutocompleteModule,
   MatExpansionModule,
-  MatFormFieldModule,
   MatProgressBarModule,
 ];
 
