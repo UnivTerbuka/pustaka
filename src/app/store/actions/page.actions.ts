@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
 import { Page } from '../models/page';
+import { PageInfo } from '../models/page-info';
 
 export enum PageActionTypes {
   GET_PAGE = '[Page] Get Page',
@@ -9,7 +10,7 @@ export enum PageActionTypes {
 
 export class GetPageAction implements Action {
   readonly type = PageActionTypes.GET_PAGE;
-  constructor(public payload: string) {}
+  constructor(public payload: PageInfo) {}
 }
 
 export class GetPageSuccessAction implements Action {

@@ -21,7 +21,11 @@ export function PageReducer(
     case PageActionTypes.GET_PAGE:
       return { ...state, loading: true };
     case PageActionTypes.GET_PAGE_SUCCESS:
-      return { ...state, list: action.payload, loading: false };
+      return {
+        ...state,
+        list: [...state.list, ...action.payload],
+        loading: false,
+      };
     case PageActionTypes.GET_PAGE_FAILURE:
       return { ...state, error: action.payload, loading: false };
     default:
