@@ -10,10 +10,12 @@ import { State } from '../store/reducers';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  loading$: Observable<boolean>;
   buku$: Observable<Array<Buku>>;
   constructor(private store: Store<State>) {}
 
   ngOnInit() {
     this.buku$ = this.store.select((store) => store.buku.list);
+    this.loading$ = this.store.select((store) => store.buku.loading);
   }
 }
