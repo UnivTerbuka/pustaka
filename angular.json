@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "pustaka"
+  "defaultProject": "pustaka",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

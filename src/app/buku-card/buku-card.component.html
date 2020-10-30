@@ -2,7 +2,7 @@
   <mat-expansion-panel-header>
     <mat-panel-title>
       <mat-icon mat-list-icon>library_books</mat-icon>
-      {{ id }}
+      {{ buku.id }}
     </mat-panel-title>
     <mat-panel-description>
       {{ buku.name || buku.id }}
@@ -14,7 +14,7 @@
       mat-list-item
       class="modul-list"
       *ngFor="let modul of buku.modul"
-      [routerLink]="['/read', id, modul.doc, 1]"
+      [routerLink]="['/read', buku.id, modul.doc, 1]"
     >
       <mat-icon mat-list-icon>book</mat-icon>
       <div mat-line>{{ modul.nama }}</div>

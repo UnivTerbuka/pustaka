@@ -1,6 +1,6 @@
 <div class="grid-container">
   <app-search-buku></app-search-buku>
   <mat-accordion multi>
-    <buku-card *ngFor="let buku of book" [id]="buku.id"></buku-card>
+    <buku-card *ngFor="let buku of buku$ | async" [buku]="buku"></buku-card>
   </mat-accordion>
 </div>

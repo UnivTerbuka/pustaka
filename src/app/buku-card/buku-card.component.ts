@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Buku } from '../buku';
+import { Buku } from '../store/models/buku';
 import { BukuService } from '../buku.service';
 
 @Component({
@@ -8,21 +8,9 @@ import { BukuService } from '../buku.service';
   styleUrls: ['./buku-card.component.css'],
 })
 export class BukuCardComponent implements OnInit {
-  @Input() id: string;
-  buku: Buku;
+  @Input() buku: Buku;
 
-  constructor(private bukuService: BukuService) {}
+  constructor() {}
 
-  openModul(modul: string) {
-    this.bukuService.open(this.id, modul);
-  }
-
-  ngOnInit(): void {
-    this.bukuService
-      .get(this.id)
-      .subscribe(
-        (data) =>
-          (this.buku = { id: (data as any).id, modul: (data as any).modul })
-      );
-  }
+  ngOnInit(): void {}
 }

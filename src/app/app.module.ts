@@ -24,6 +24,10 @@ import { HomeComponent } from './home/home.component';
 import { BukuCardComponent } from './buku-card/buku-card.component';
 import { SearchBukuComponent } from './search-buku/search-buku.component';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { reducers, metaReducers } from './store/reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 const material = [
   MatToolbarModule,
@@ -60,7 +64,13 @@ const material = [
     FormsModule,
     ReactiveFormsModule,
     ...material,
-    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
