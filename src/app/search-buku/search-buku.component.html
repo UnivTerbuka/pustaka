@@ -4,15 +4,11 @@
     *ngIf="field.value"
     matSuffix
     aria-label="Clear"
-    (click)="field.value = ''"
+    (click)="field.setValue('')"
   >
     <mat-icon>close</mat-icon>
   </button>
-  <button
-    mat-button
-    *ngIf="field.value && field.valid"
-    (click)="submit(field.value)"
-  >
+  <button mat-button *ngIf="field.value && field.valid" (click)="submit()">
     <mat-icon>search</mat-icon>
   </button>
 </form>

@@ -13,7 +13,8 @@ export class SearchBukuComponent implements OnInit {
   field = new FormControl('', Validators.pattern('^[a-zA-Z]{4}[0-9]{4,6}'));
   constructor(private store: Store<State>) {}
   ngOnInit(): void {}
-  submit(id: string) {
-    this.store.dispatch(new GetBukuAction(id.toUpperCase()));
+  submit() {
+    this.store.dispatch(new GetBukuAction(this.field.value.toUpperCase()));
+    this.field.setValue('');
   }
 }
