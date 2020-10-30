@@ -14,10 +14,6 @@ export class HomeComponent implements OnInit {
   buku$: Observable<Array<Buku>>;
   constructor(private bukuService: BukuService, private store: Store<State>) {}
 
-  public get book(): any {
-    return this.bukuService.myBook;
-  }
-
   ngOnInit() {
     this.buku$ = this.store.select((store) => store.buku.list);
   }

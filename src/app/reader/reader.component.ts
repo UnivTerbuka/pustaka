@@ -24,11 +24,15 @@ export class ReaderComponent implements OnInit {
         this.modul = params.get('modul');
         this.page = Number(params.get('page'));
         this.service
-          .get_image(this.id, this.modul, this.page)
+          .get_image({ id: this.id, modul: this.modul, page: this.page })
           .subscribe((data) => {
             this._url = data.headers.get('location');
           });
-        return this.service.get_text(this.id, this.modul, this.page);
+        return this.service.get_text({
+          id: this.id,
+          modul: this.modul,
+          page: this.page,
+        });
       })
     );
   }
