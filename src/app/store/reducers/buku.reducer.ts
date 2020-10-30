@@ -1,6 +1,5 @@
 import { act } from '@ngrx/effects';
-import { createReducer, on } from '@ngrx/store';
-import { Action } from 'rxjs/internal/scheduler/Action';
+import { logging } from 'protractor';
 import {
   BukuAction,
   BukuActionTypes,
@@ -134,7 +133,11 @@ export function BukuReducer(
     case BukuActionTypes.GET_BUKU:
       return { ...state, loading: true };
     case BukuActionTypes.GET_BUKU_SUCCESS:
-      return { list: action.payload, loading: false, ...state };
+      return {
+        list: [...state.list, action.payload],
+        loading: false,
+        ...state,
+      };
     case BukuActionTypes.GET_BUKU_FAILURE:
       return { ...state, error: action.payload, loading: false };
     default:
