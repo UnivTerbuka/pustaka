@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { reducers, metaReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { BukuEffects } from './store/effects/buku.effects';
 
 const material = [
   MatToolbarModule,
@@ -45,6 +47,7 @@ const material = [
   MatAutocompleteModule,
   MatExpansionModule,
   MatFormFieldModule,
+  MatProgressBarModule,
 ];
 
 @NgModule({
@@ -64,7 +67,7 @@ const material = [
     FormsModule,
     ReactiveFormsModule,
     ...material,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([BukuEffects]),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreDevtoolsModule.instrument({
