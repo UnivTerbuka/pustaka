@@ -1,9 +1,18 @@
 <form class="buku-form-field">
-  <input matInput placeholder="Buku" type="text" [(ngModel)]="value" />
-  <button *ngIf="value" matSuffix aria-label="Clear" (click)="value = ''">
+  <input matInput placeholder="Kode Buku" type="text" [formControl]="field" />
+  <button
+    *ngIf="field.value"
+    matSuffix
+    aria-label="Clear"
+    (click)="field.value = ''"
+  >
     <mat-icon>close</mat-icon>
   </button>
-  <button mat-button *ngIf="value">
+  <button
+    mat-button
+    *ngIf="field.value && field.valid"
+    (click)="submit(field.value)"
+  >
     <mat-icon>search</mat-icon>
   </button>
 </form>

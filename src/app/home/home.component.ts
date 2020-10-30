@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Buku } from '../store/models/buku';
-import { BukuService } from '../buku.service';
 import { Store } from '@ngrx/store';
 import { State } from '../store/reducers';
 

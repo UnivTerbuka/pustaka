@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { State } from '../store/reducers';
 import { Buku } from '../store/models/buku';
-import { BukuService } from '../buku.service';
+import { DeleteBukuAction } from '../store/actions/buku.actions';
 
 @Component({
   selector: 'buku-card',
@@ -10,7 +12,11 @@ import { BukuService } from '../buku.service';
 export class BukuCardComponent implements OnInit {
   @Input() buku: Buku;
 
-  constructor() {}
+  constructor(private store: Store<State>) {}
 
   ngOnInit(): void {}
+
+  delete() {
+    this.store.dispatch(new DeleteBukuAction(this.buku.id));
+  }
 }

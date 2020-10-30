@@ -1,4 +1,5 @@
 import { act } from '@ngrx/effects';
+import { stat } from 'fs';
 import { logging } from 'protractor';
 import {
   BukuAction,
@@ -134,12 +135,17 @@ export function BukuReducer(
       return { ...state, loading: true };
     case BukuActionTypes.GET_BUKU_SUCCESS:
       return {
-        list: [...state.list, action.payload],
         loading: false,
-        ...state,
+        list: [...state.list, action.payload],
+        error: undefined,
       };
     case BukuActionTypes.GET_BUKU_FAILURE:
       return { ...state, error: action.payload, loading: false };
+    case BukuActionTypes.DELETE_BUKU:
+      return {
+        ...state,
+        list: state.list.filter((item) => item.id !== action.payload),
+      };
     default:
       return { ...state };
   }
