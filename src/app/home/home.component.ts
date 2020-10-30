@@ -12,7 +12,7 @@ import { State } from '../store/reducers';
 })
 export class HomeComponent implements OnInit {
   buku$: Observable<Array<Buku>>;
-  constructor(private bukuService: BukuService, private store: Store<State>) {}
+  constructor(private store: Store<State>) {}
 
   ngOnInit() {
     this.buku$ = this.store.select((store) => store.buku.list);
