@@ -20,10 +20,11 @@ export class ReaderComponent implements OnInit {
   constructor(private route: ActivatedRoute, private store: Store<State>) {}
 
   ngOnInit(): void {
-    this.pageInfo.id = this.route.snapshot.params.id;
-    this.pageInfo.modul = this.route.snapshot.params.modul;
-    this.pageInfo.page = Number(this.route.snapshot.params.page);
-    console.log(this.pageInfo);
+    this.pageInfo = {
+      id: this.route.snapshot.paramMap.get('id'),
+      modul: this.route.snapshot.paramMap.get('modul'),
+      page: Number(this.route.snapshot.paramMap.get('page')),
+    };
     this.store.dispatch(new GetPageAction(this.pageInfo));
     this.page$ = this.store.pipe(
       map((state) =>

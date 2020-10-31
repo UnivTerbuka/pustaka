@@ -1,14 +1,18 @@
 <div>
+  <span>Info {{ pageInfo.id }}</span>
   <mat-progress-spinner *ngIf="loading$ | async"></mat-progress-spinner>
   <div
     *ngIf="page$ | async"
     [style.width.px]="(page$ | async).width"
     [style.height.px]="(page$ | async).height"
   >
-    <app-text
+    <span
       *ngFor="let text of (page$ | async).text; index as i"
-      [text]="text"
-      [id]="i"
-    ></app-text>
+      id="text_{{ i }}"
+      [style.top.px]="this.text[0]"
+      [style.left.px]="this.text[1]"
+    >
+      {{ text[5] }}
+    </span>
   </div>
 </div>
