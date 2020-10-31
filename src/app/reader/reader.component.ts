@@ -36,9 +36,15 @@ export class ReaderComponent implements OnInit {
     });
     this.store.dispatch(new GetPageAction(this.pageInfo));
     this.page$ = this.store.pipe(
-      map((state) =>
-        state.page.list.find((page) => page.number === this.pageInfo.page)
-      )
+      map((state) => {
+        let cp = this.pageInfo;
+        return state.page.list.find(
+          (page) =>
+            page.number === cp.page &&
+            page.modul === cp.modul &&
+            page.id === cp.id
+        );
+      })
     );
     this.loading$ = this.store.select((store) => store.page.loading);
   }
