@@ -1,18 +1,15 @@
 import { BukuAction, BukuActionTypes } from '../actions/buku.actions';
 import { Buku } from '../models/buku';
-import { PageInfo } from '../models/page-info';
 
 export interface BukuState {
   list: Array<Buku>;
   loading: boolean;
-  current?: PageInfo;
   error?: string;
 }
 
 const initialState: BukuState = {
   list: [],
   loading: false,
-  current: undefined,
   error: undefined,
 };
 

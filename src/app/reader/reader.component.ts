@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { PageEvent } from '@angular/material/paginator';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -14,17 +15,25 @@ import { State } from '../store/reducers';
   styleUrls: ['./reader.component.css'],
 })
 export class ReaderComponent implements OnInit {
+  pageEvent: PageEvent;
   pageInfo: PageInfo;
   page$: Observable<Page>;
   loading$: Observable<boolean>;
-  constructor(private route: ActivatedRoute, private store: Store<State>) {}
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private store: Store<State>
+  ) {}
 
   ngOnInit(): void {
-    this.pageInfo = {
-      id: this.route.snapshot.paramMap.get('id'),
-      modul: this.route.snapshot.paramMap.get('modul'),
-      page: Number(this.route.snapshot.paramMap.get('page')),
-    };
+    this.activatedRoute.params.subscribe((params) => {
+      this.pageInfo = {
+        id: params.id,
+        modul: params.modul,
+        page: Number(params.page),
+      };
+    });
     this.store.dispatch(new GetPageAction(this.pageInfo));
     this.page$ = this.store.pipe(
       map((state) =>
@@ -32,5 +41,16 @@ export class ReaderComponent implements OnInit {
       )
     );
     this.loading$ = this.store.select((store) => store.page.loading);
+  }
+
+  pageEventHandler(event?: PageEvent) {
+    console.log(JSON.stringify(event));
+    this.router.navigate([
+      '/read',
+      this.pageInfo.id,
+      this.pageInfo.modul,
+      event.pageIndex + 1,
+    ]);
+    return event;
   }
 }

@@ -1,4 +1,6 @@
 export interface Page {
+  id?: string;
+  modul?: string;
   fonts: Font[];
   height: number;
   number: number;
