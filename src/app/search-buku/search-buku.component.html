@@ -1,5 +1,11 @@
 <form class="buku-form-field">
-  <input matInput placeholder="Kode Buku" type="text" [formControl]="field" />
+  <input
+    matInput
+    placeholder="Kode Buku"
+    type="text"
+    [formControl]="field"
+    (submit)="submit()"
+  />
   <button
     *ngIf="field.value"
     matSuffix

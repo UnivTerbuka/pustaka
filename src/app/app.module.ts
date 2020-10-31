@@ -15,7 +15,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
 import { BukuCardComponent } from './buku-card/buku-card.component';
 import { SearchBukuComponent } from './search-buku/search-buku.component';
@@ -44,7 +43,6 @@ const material = [
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
     HomeComponent,
     BukuCardComponent,
     SearchBukuComponent,
