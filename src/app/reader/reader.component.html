@@ -1,16 +1,18 @@
 <div style="display: flex; justify-content: center">
   <mat-progress-spinner *ngIf="loading$ | async"></mat-progress-spinner>
-  <mat-card
-    *ngIf="page$ | async"
-    [style.width.px]="(page$ | async).width"
-    [style.height.px]="(page$ | async).height"
-  >
-    <mat-card-content>
+  <mat-card *ngIf="page$ | async">
+    <mat-card-content
+      [style.width.px]="(page$ | async).width"
+      [style.height.px]="(page$ | async).height"
+    >
       <span
         *ngFor="let text of (page$ | async).text; index as i"
         id="text_{{ i }}"
+        style="position: absolute"
         [style.top.px]="this.text[0]"
         [style.left.px]="this.text[1]"
+        [style.width.px]="this.text[2]"
+        [style.height.px]="this.text[3]"
       >
         {{ text[5] }}
       </span>

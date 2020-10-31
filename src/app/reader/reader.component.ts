@@ -34,16 +34,21 @@ export class ReaderComponent implements OnInit {
         page: Number(params.page),
       };
     });
-    this.store.dispatch(new GetPageAction(this.pageInfo));
+    // this.store.dispatch(new GetPageAction(this.pageInfo));
     this.page$ = this.store.pipe(
       map((state) => {
         let cp = this.pageInfo;
-        return state.page.list.find(
+        let p = state.page.list.find(
           (page) =>
             page.number === cp.page &&
             page.modul === cp.modul &&
             page.id === cp.id
         );
+        if (p) {
+          return p;
+        } else if (!state.page.loading) {
+          this.store.dispatch(new GetPageAction(this.pageInfo));
+        }
       })
     );
     this.loading$ = this.store.select((store) => store.page.loading);

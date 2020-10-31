@@ -20,8 +20,8 @@ export class PageEffects {
   page$: Observable<PageState>;
   @Effect() getPage$ = this.actions$.pipe(
     ofType<GetPageAction>(PageActionTypes.GET_PAGE),
-    mergeMap((action) =>
-      this.service.get_json(action.payload).pipe(
+    mergeMap((action) => {
+      return this.service.get_json(action.payload).pipe(
         map((page) => {
           page.forEach((page) => {
             page.id = action.payload.id;
@@ -30,8 +30,8 @@ export class PageEffects {
           return new GetPageSuccessAction(page);
         }),
         catchError((error) => of(new GetPageFailureAction(error)))
-      )
-    )
+      );
+    })
   );
   @Effect() changePage$ = this.actions$.pipe(
     ofType<ChangePageAction>(PageActionTypes.CHANGE_PAGE),
