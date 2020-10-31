@@ -25,6 +25,7 @@ import { reducers, metaReducers } from './store/reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { BukuEffects } from './store/effects/buku.effects';
+import { PageEffects } from './store/effects/page.effects';
 
 const material = [
   MatToolbarModule,
@@ -57,7 +58,7 @@ const material = [
     FormsModule,
     ReactiveFormsModule,
     ...material,
-    EffectsModule.forRoot([BukuEffects]),
+    EffectsModule.forRoot([BukuEffects, PageEffects]),
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreDevtoolsModule.instrument({
