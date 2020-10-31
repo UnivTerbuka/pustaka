@@ -27,14 +27,11 @@ export class ReaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      this.pageInfo = {
-        id: params.id,
-        modul: params.modul,
-        page: Number(params.page),
-      };
-    });
-    // this.store.dispatch(new GetPageAction(this.pageInfo));
+    this.pageInfo = {
+      id: this.activatedRoute.snapshot.paramMap.get('id'),
+      modul: this.activatedRoute.snapshot.paramMap.get('modul'),
+      page: Number(this.activatedRoute.snapshot.paramMap.get('page')),
+    };
     this.page$ = this.store.pipe(
       map((state) => {
         let cp = this.pageInfo;
