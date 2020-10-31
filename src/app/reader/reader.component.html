@@ -5,10 +5,10 @@
     [style.width.px]="(page$ | async).width"
     [style.height.px]="(page$ | async).height"
   >
-    <span
+    <app-text
       *ngFor="let text of (page$ | async).text; index as i"
-      [id]="'word_' + i"
-      >{{ text[5] }}</span
-    >
+      [text]="text"
+      [id]="i"
+    ></app-text>
   </div>
 </div>
