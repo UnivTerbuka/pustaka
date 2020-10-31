@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { BukuService } from '../buku.service';
+import { map } from 'rxjs/operators';
+import { GetPageAction } from '../store/actions/page.actions';
+import { Page } from '../store/models/page';
+import { PageInfo } from '../store/models/page-info';
+import { State } from '../store/reducers';
 
 @Component({
   selector: 'app-reader',
@@ -10,34 +14,22 @@ import { BukuService } from '../buku.service';
   styleUrls: ['./reader.component.css'],
 })
 export class ReaderComponent implements OnInit {
-  id: string;
-  modul: string;
-  page: number;
-  _url: string;
-  content$: Observable<string>;
-  constructor(private route: ActivatedRoute, private service: BukuService) {}
+  pageInfo: PageInfo;
+  page$: Observable<Page>;
+  loading$: Observable<boolean>;
+  constructor(private route: ActivatedRoute, private store: Store<State>) {}
 
   ngOnInit(): void {
-    this.content$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => {
-        this.id = params.get('id');
-        this.modul = params.get('modul');
-        this.page = Number(params.get('page'));
-        this.service
-          .get_image({ id: this.id, modul: this.modul, page: this.page })
-          .subscribe((data) => {
-            this._url = data.headers.get('location');
-          });
-        return this.service.get_text({
-          id: this.id,
-          modul: this.modul,
-          page: this.page,
-        });
-      })
+    this.pageInfo.id = this.route.snapshot.params.id;
+    this.pageInfo.modul = this.route.snapshot.params.modul;
+    this.pageInfo.page = Number(this.route.snapshot.params.page);
+    console.log(this.pageInfo);
+    this.store.dispatch(new GetPageAction(this.pageInfo));
+    this.page$ = this.store.pipe(
+      map((state) =>
+        state.page.list.find((page) => page.number === this.pageInfo.page)
+      )
     );
-  }
-
-  public get image(): string {
-    return `url(${this._url})`;
+    this.loading$ = this.store.select((store) => store.page.loading);
   }
 }

@@ -1,3 +1,14 @@
-<div [ngStyle]="{ 'background-image': image }">
-  <p>{{ content$ | async }}</p>
+<div>
+  <mat-progress-spinner *ngIf="loading$ | async"></mat-progress-spinner>
+  <div
+    *ngIf="page$ | async"
+    [style.width.px]="(page$ | async).width"
+    [style.height.px]="(page$ | async).height"
+  >
+    <span
+      *ngFor="let text of (page$ | async).text; index as i"
+      [id]="'word_' + i"
+      >{{ text[5] }}</span
+    >
+  </div>
 </div>
