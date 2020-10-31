@@ -17,7 +17,9 @@ export class TextComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.style.top = `${this.text[0]}px`;
-    this.style.left = `${this.text[1]}px`;
+    this.style = {
+      top: `${this.text[0]}px`,
+      left: `${this.text[1]}px`,
+    };
   }
 }
