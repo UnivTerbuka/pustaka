@@ -1,6 +1,12 @@
 <div style="display: flex; justify-content: center">
   <mat-spinner style="margin-top: 50px" *ngIf="loading$ | async"></mat-spinner>
   <mat-card *ngIf="page$ | async">
+    <mat-card-header>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="completion"
+      ></mat-progress-bar>
+    </mat-card-header>
     <mat-card-content
       [style.width.px]="(page$ | async).width"
       [style.height.px]="(page$ | async).height"
@@ -22,6 +28,7 @@
         #paginator
         [length]="(page$ | async).pages"
         [pageSize]="1"
+        [pageIndex]="pageInfo.page - 1"
         [hidePageSize]="true"
         (page)="page = pageEventHandler($event)"
       >

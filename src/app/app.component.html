@@ -32,10 +32,12 @@
         <mat-icon>share</mat-icon>
       </button>
     </mat-toolbar>
-    <mat-spinner
-      style="margin-top: 50px; display: flex; justify-self: center"
-      *ngIf="loading$ | async"
-    ></mat-spinner>
+    <div style="display: flex; justify-content: center">
+      <mat-spinner
+        style="margin-top: 50px; display: flex; justify-self: center"
+        *ngIf="loading$ | async"
+      ></mat-spinner>
+    </div>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

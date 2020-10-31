@@ -15,6 +15,8 @@ import { State } from '../store/reducers';
   styleUrls: ['./reader.component.css'],
 })
 export class ReaderComponent implements OnInit {
+  init: boolean = false;
+  completion: number = 0;
   pageEvent: PageEvent;
   pageInfo: PageInfo;
   page$: Observable<Page>;
@@ -42,6 +44,7 @@ export class ReaderComponent implements OnInit {
             page.id === cp.id
         );
         if (p) {
+          this.completion = Number((cp.page / p.pages) * 100);
           return p;
         } else if (!state.page.loading) {
           this.store.dispatch(new GetPageAction(this.pageInfo));
@@ -52,13 +55,13 @@ export class ReaderComponent implements OnInit {
   }
 
   pageEventHandler(event?: PageEvent) {
-    console.log(JSON.stringify(event));
     this.router.navigate([
       '/read',
       this.pageInfo.id,
       this.pageInfo.modul,
       event.pageIndex + 1,
     ]);
+    this.ngOnInit();
     return event;
   }
 }
