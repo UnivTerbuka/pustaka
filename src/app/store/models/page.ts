@@ -4,6 +4,7 @@ export interface Page {
   number: number;
   pages: number;
   text: Array<Array<number | string>>;
+  // [[number,number,number,number,number, string]]
   width: number;
 }
 
