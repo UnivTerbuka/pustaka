@@ -2,13 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { BukuService } from '../buku.service';
-import { ChangePageAction, GetPageAction } from '../store/actions/page.actions';
-import { Page } from '../store/models/page';
+import { GetPageAction } from '../store/actions/page.actions';
+import { Font, Page } from '../store/models/page';
 import { PageInfo } from '../store/models/page-info';
 import { State } from '../store/reducers';
+
+interface TextStyle {
+  top: string | number;
+  left: string | number;
+  width: string | number;
+  height: string | number;
+  size?: string | number;
+  color?: string;
+}
 
 @Component({
   selector: 'app-reader',
@@ -21,6 +30,7 @@ export class ReaderComponent implements OnInit {
 
   pageEvent: PageEvent;
   pageInfo: PageInfo;
+  fonts: Array<Font>;
   pages$: Observable<Array<Page>>;
   current$: Observable<PageInfo>;
   loading$: Observable<boolean>;
@@ -44,6 +54,7 @@ export class ReaderComponent implements OnInit {
     this.loading$ = this.store.select((store) => store.page.loading);
     this.error$ = this.store.select((store) => store.page.error);
     this.pages$ = this.service.get_page(this.pageInfo);
+    this.fonts = this.service.get_fonts(this.pageInfo);
   }
 
   pageEventHandler(event?: PageEvent) {
@@ -60,10 +71,19 @@ export class ReaderComponent implements OnInit {
     let page = this.service.get_page(this.pageInfo);
     if (page) {
       this.pages$ = page;
+      this.fonts = this.service.get_fonts(this.pageInfo);
     } else {
       this.ngOnInit();
     }
-    // this.ngOnInit();
     return event;
+  }
+
+  getStyle(text: Array<number | string>): TextStyle {
+    return {
+      top: text[0] + 'px',
+      left: text[1] + 'px',
+      width: text[2] + 'px',
+      height: text[3] + 'px',
+    };
   }
 }

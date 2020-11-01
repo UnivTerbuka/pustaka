@@ -1,7 +1,7 @@
 export interface Page {
   id?: string;
   modul?: string;
-  fonts: Font[];
+  fonts: Array<Font>;
   height: number;
   number: number;
   pages: number;

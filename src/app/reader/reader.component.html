@@ -1,16 +1,13 @@
+<mat-progress-bar mode="determinate" [value]="completion"></mat-progress-bar>
 <div style="display: flex; justify-content: center">
   <mat-spinner style="margin-top: 50px" *ngIf="loading$ | async"></mat-spinner>
-  <mat-progress-bar mode="determinate" [value]="completion"></mat-progress-bar>
   <mat-card *ngFor="let p of pages$ | async">
     <mat-card-content [style.width.px]="p.width" [style.height.px]="p.height">
       <span
         *ngFor="let text of p.text; index as i"
         id="text_{{ i }}"
         style="position: absolute"
-        [style.top.px]="text[0]"
-        [style.left.px]="text[1]"
-        [style.width.px]="text[2]"
-        [style.height.px]="text[3]"
+        [style]="getStyle(text)"
       >
         {{ text[5] }}
       </span>
