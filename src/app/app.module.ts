@@ -26,6 +26,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { BukuEffects } from './store/effects/buku.effects';
 import { PageEffects } from './store/effects/page.effects';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 const material = [
   MatToolbarModule,
@@ -65,6 +66,7 @@ const material = [
       logOnly: environment.production,
     }),
     StoreRouterConnectingModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent],
