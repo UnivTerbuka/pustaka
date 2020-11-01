@@ -36,7 +36,7 @@ export function PageReducer(
     case PageActionTypes.CHANGE_PAGE_SUCCESS:
       return {
         ...state,
-        list: [...state.list, ...action.payload],
+        list: [...action.payload],
         loading: false,
       };
     case PageActionTypes.CHANGE_PAGE_FAILURE:

@@ -1,19 +1,16 @@
 <div style="display: flex; justify-content: center">
-  <mat-progress-bar mode="determinate" [value]="completion"></mat-progress-bar>
   <mat-spinner style="margin-top: 50px" *ngIf="loading$ | async"></mat-spinner>
-  <mat-card *ngIf="page$ | async">
-    <mat-card-content
-      [style.width.px]="(page$ | async).width"
-      [style.height.px]="(page$ | async).height"
-    >
+  <mat-progress-bar mode="determinate" [value]="completion"></mat-progress-bar>
+  <mat-card *ngFor="let p of pages$ | async">
+    <mat-card-content [style.width.px]="p.width" [style.height.px]="p.height">
       <span
-        *ngFor="let text of (page$ | async).text; index as i"
+        *ngFor="let text of p.text; index as i"
         id="text_{{ i }}"
         style="position: absolute"
-        [style.top.px]="this.text[0]"
-        [style.left.px]="this.text[1]"
-        [style.width.px]="this.text[2]"
-        [style.height.px]="this.text[3]"
+        [style.top.px]="text[0]"
+        [style.left.px]="text[1]"
+        [style.width.px]="text[2]"
+        [style.height.px]="text[3]"
       >
         {{ text[5] }}
       </span>
@@ -21,11 +18,11 @@
     <mat-card-actions>
       <mat-paginator
         #paginator
-        [length]="(page$ | async).pages"
+        [length]="p.pages"
         [pageSize]="1"
         [pageIndex]="pageInfo.page - 1"
         [hidePageSize]="true"
-        (page)="page = pageEventHandler($event)"
+        (page)="pageEventHandler($event)"
       >
       </mat-paginator>
     </mat-card-actions>
