@@ -5,9 +5,6 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, take } from 'rxjs/operators';
 import { BukuService } from 'src/app/buku.service';
 import {
-  ChangePageAction,
-  ChangePageFailureAction,
-  ChangePageSuccessAction,
   GetPageAction,
   GetPageFailureAction,
   GetPageSuccessAction,
@@ -47,23 +44,6 @@ export class PageEffects {
         catchError((error) => of(new GetPageFailureAction(error)))
       );
     })
-  );
-  @Effect() changePage$ = this.actions$.pipe(
-    ofType<ChangePageAction>(PageActionTypes.CHANGE_PAGE),
-    mergeMap((action) =>
-      this.page$.pipe(
-        map((page) => {
-          let f = action.payload;
-          let p = page.list.find(
-            (p) => p.id === f.id && p.modul === f.modul && p.number === f.page
-          );
-          if (p) {
-            return new ChangePageSuccessAction(page.list);
-          } else return new GetPageAction(f);
-        }),
-        catchError((error) => of(new ChangePageFailureAction(error)))
-      )
-    )
   );
   constructor(
     private actions$: Actions,

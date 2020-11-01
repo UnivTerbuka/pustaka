@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { LayoutModule } from '@angular/cdk/layout';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,6 +28,7 @@ import { environment } from '../environments/environment';
 import { BukuEffects } from './store/effects/buku.effects';
 import { PageEffects } from './store/effects/page.effects';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 const material = [
   MatToolbarModule,
@@ -55,6 +57,7 @@ const material = [
     BrowserAnimationsModule,
     HttpClientModule,
     LayoutModule,
+    ClipboardModule,
     FormsModule,
     ReactiveFormsModule,
     ...material,
@@ -66,9 +69,11 @@ const material = [
       logOnly: environment.production,
     }),
     StoreRouterConnectingModule.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

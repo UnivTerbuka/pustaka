@@ -32,15 +32,7 @@ export function PageReducer(
     case PageActionTypes.GET_PAGE_FAILURE:
       return { ...state, error: action.payload, loading: false };
     case PageActionTypes.CHANGE_PAGE:
-      return { ...state, loading: true };
-    case PageActionTypes.CHANGE_PAGE_SUCCESS:
-      return {
-        ...state,
-        list: [...action.payload],
-        loading: false,
-      };
-    case PageActionTypes.CHANGE_PAGE_FAILURE:
-      return { ...state, error: action.payload, loading: false };
+      return { ...state, current: action.payload };
     default:
       return { ...state };
   }

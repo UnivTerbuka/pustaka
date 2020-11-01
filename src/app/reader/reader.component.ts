@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { BukuService } from '../buku.service';
-import { GetPageAction } from '../store/actions/page.actions';
+import { ChangePageAction, GetPageAction } from '../store/actions/page.actions';
 import { Font, Page } from '../store/models/page';
 import { PageInfo } from '../store/models/page-info';
 import { State } from '../store/reducers';
@@ -49,6 +49,7 @@ export class ReaderComponent implements OnInit {
       modul: this.activatedRoute.snapshot.paramMap.get('modul'),
       page: Number(this.activatedRoute.snapshot.paramMap.get('page')),
     };
+    this.store.dispatch(new ChangePageAction(this.pageInfo));
     this.store.dispatch(new GetPageAction(this.pageInfo));
     this.current$ = this.store.select((store) => store.page.current);
     this.loading$ = this.store.select((store) => store.page.loading);
@@ -75,6 +76,7 @@ export class ReaderComponent implements OnInit {
     } else {
       this.ngOnInit();
     }
+    this.store.dispatch(new ChangePageAction(this.pageInfo));
     return event;
   }
 

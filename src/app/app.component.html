@@ -28,7 +28,11 @@
       </button>
       <span>{{ title }}</span>
       <span class="spacer"></span>
-      <button mat-icon-button aria-label="Share">
+      <button
+        mat-icon-button
+        aria-label="Salin"
+        [cdkCopyToClipboard]="currentUrl"
+      >
         <mat-icon>share</mat-icon>
       </button>
     </mat-toolbar>
