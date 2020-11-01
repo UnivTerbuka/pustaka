@@ -26,5 +26,29 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "name": "Buku",
+      "urls": [
+        "https://universitas-terbuka-bot.herokuapp.com/pustaka/book/**"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxAge": "7d",
+        "maxSize": 50
+      }
+    },
+    {
+      "name": "Page",
+      "urls": [
+        "https://universitas-terbuka-bot.herokuapp.com/pustaka/json/**"
+      ],
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxAge": "7d",
+        "maxSize": 256
+      }
+    }
   ]
 }
