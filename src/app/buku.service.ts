@@ -60,7 +60,10 @@ export class BukuService {
       .pipe(
         mergeMap((pages) => {
           let p = pages.find((p) => p.modul === page.modul && p.id === page.id);
-          return of(p.fonts);
+          if (p) {
+            return of(p.fonts);
+          }
+          return [];
         }),
         filter((fonts) => fonts && fonts.length > 0),
         take(1)
