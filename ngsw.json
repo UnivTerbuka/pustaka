@@ -1,0 +1,109 @@
+{
+  "configVersion": 1,
+  "timestamp": 1604247026092,
+  "index": "/pustaka/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/pustaka/4.84fd5aca75ab7151e6bc.js",
+        "/pustaka/favicon.ico",
+        "/pustaka/index.html",
+        "/pustaka/main.aff79318a1ae5818a2af.js",
+        "/pustaka/manifest.webmanifest",
+        "/pustaka/polyfills.35a5ca1855eb057f016a.js",
+        "/pustaka/runtime.4d037b7b5457846ba745.js",
+        "/pustaka/styles.4154e53e924fd7329071.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/pustaka/assets/icons/icon-128x128.png",
+        "/pustaka/assets/icons/icon-144x144.png",
+        "/pustaka/assets/icons/icon-152x152.png",
+        "/pustaka/assets/icons/icon-192x192.png",
+        "/pustaka/assets/icons/icon-384x384.png",
+        "/pustaka/assets/icons/icon-512x512.png",
+        "/pustaka/assets/icons/icon-72x72.png",
+        "/pustaka/assets/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "Buku",
+      "patterns": [
+        "https:\\/\\/universitas-terbuka-bot\\.herokuapp\\.com\\/pustaka\\/book\\/.*"
+      ],
+      "strategy": "performance",
+      "maxSize": 50,
+      "maxAge": 604800000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    },
+    {
+      "name": "Page",
+      "patterns": [
+        "https:\\/\\/universitas-terbuka-bot\\.herokuapp\\.com\\/pustaka\\/json\\/.*"
+      ],
+      "strategy": "performance",
+      "maxSize": 256,
+      "maxAge": 604800000,
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "version": 1
+    }
+  ],
+  "hashTable": {
+    "/pustaka/4.84fd5aca75ab7151e6bc.js": "ecb061a155e1c390a43b611f6f7f59fc7d50a15d",
+    "/pustaka/assets/icons/icon-128x128.png": "7369832f9500d42fbfd8d5bf66414af90038eedf",
+    "/pustaka/assets/icons/icon-144x144.png": "bea7f007af7aae03c0fe1e68376183045e24c464",
+    "/pustaka/assets/icons/icon-152x152.png": "8563413c500d95bf98d5a18b70ce6216f44b64e7",
+    "/pustaka/assets/icons/icon-192x192.png": "f356f69dfb7f514441d0b72a0a67c97b2bfdd95a",
+    "/pustaka/assets/icons/icon-384x384.png": "a3b310e1f8deabb5da9b3c6c95d29a83997a77db",
+    "/pustaka/assets/icons/icon-512x512.png": "40964f8fbaa9955eff2008d292632c65ea17cda7",
+    "/pustaka/assets/icons/icon-72x72.png": "bca1384956318cda0e894219f7f830f1e747dc3f",
+    "/pustaka/assets/icons/icon-96x96.png": "7b7fd455d294d81f03604fa416710ab88f989739",
+    "/pustaka/favicon.ico": "32ad2f69ac24b0962de404cd5e1ecfb7857f0cc7",
+    "/pustaka/index.html": "789912ceaeaed712e7d28c9558fd20bc5606e33d",
+    "/pustaka/main.aff79318a1ae5818a2af.js": "cf060edfa34544f893150a2246c24b4f8d213617",
+    "/pustaka/manifest.webmanifest": "2ca7931a7333cba504b90c7fbb628d4ba9255809",
+    "/pustaka/polyfills.35a5ca1855eb057f016a.js": "578360d24ce37383f261c7ef63b1f822d28e8dde",
+    "/pustaka/runtime.4d037b7b5457846ba745.js": "7956b04e760ceeadc74a36dbb39f2bf9f86b0374",
+    "/pustaka/styles.4154e53e924fd7329071.css": "f7b7e3bc5642549f6800a23a347f16f75ae511ea"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
