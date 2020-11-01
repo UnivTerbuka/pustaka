@@ -1,12 +1,7 @@
 <div style="display: flex; justify-content: center">
+  <mat-progress-bar mode="determinate" [value]="completion"></mat-progress-bar>
   <mat-spinner style="margin-top: 50px" *ngIf="loading$ | async"></mat-spinner>
   <mat-card *ngIf="page$ | async">
-    <mat-card-header>
-      <mat-progress-bar
-        mode="determinate"
-        [value]="completion"
-      ></mat-progress-bar>
-    </mat-card-header>
     <mat-card-content
       [style.width.px]="(page$ | async).width"
       [style.height.px]="(page$ | async).height"

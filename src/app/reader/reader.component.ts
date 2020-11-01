@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GetPageAction } from '../store/actions/page.actions';
+import { ChangePageAction, GetPageAction } from '../store/actions/page.actions';
 import { Page } from '../store/models/page';
 import { PageInfo } from '../store/models/page-info';
 import { State } from '../store/reducers';
@@ -19,8 +19,10 @@ export class ReaderComponent implements OnInit {
   completion: number = 0;
   pageEvent: PageEvent;
   pageInfo: PageInfo;
+  current$: Observable<PageInfo>;
   page$: Observable<Page>;
   loading$: Observable<boolean>;
+  error$: Observable<string>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -34,6 +36,12 @@ export class ReaderComponent implements OnInit {
       modul: this.activatedRoute.snapshot.paramMap.get('modul'),
       page: Number(this.activatedRoute.snapshot.paramMap.get('page')),
     };
+
+    this.store.dispatch(new ChangePageAction(this.pageInfo));
+    this.current$ = this.store.select((store) => store.page.current);
+    this.loading$ = this.store.select((store) => store.page.loading);
+    this.error$ = this.store.select((store) => store.page.error);
+
     this.page$ = this.store.pipe(
       map((state) => {
         let cp = this.pageInfo;
@@ -51,17 +59,18 @@ export class ReaderComponent implements OnInit {
         }
       })
     );
-    this.loading$ = this.store.select((store) => store.page.loading);
   }
 
   pageEventHandler(event?: PageEvent) {
+    this.pageInfo.page = event.pageIndex + 1;
     this.router.navigate([
       '/read',
       this.pageInfo.id,
       this.pageInfo.modul,
       event.pageIndex + 1,
     ]);
-    this.ngOnInit();
+    this.store.dispatch(new ChangePageAction(this.pageInfo));
+    // this.ngOnInit();
     return event;
   }
 }
