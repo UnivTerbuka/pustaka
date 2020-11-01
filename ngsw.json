@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1604247026092,
+  "timestamp": 1604252160867,
   "index": "/pustaka/index.html",
   "assetGroups": [
     {
@@ -11,13 +11,13 @@
         "ignoreVary": true
       },
       "urls": [
-        "/pustaka/4.84fd5aca75ab7151e6bc.js",
+        "/pustaka/4.be0733f5dceec44d4abe.js",
         "/pustaka/favicon.ico",
         "/pustaka/index.html",
-        "/pustaka/main.aff79318a1ae5818a2af.js",
+        "/pustaka/main.7d8b7f77c42754db1899.js",
         "/pustaka/manifest.webmanifest",
         "/pustaka/polyfills.35a5ca1855eb057f016a.js",
-        "/pustaka/runtime.4d037b7b5457846ba745.js",
+        "/pustaka/runtime.f7c961f9aaeb356eced9.js",
         "/pustaka/styles.4154e53e924fd7329071.css"
       ],
       "patterns": []
@@ -71,7 +71,7 @@
     }
   ],
   "hashTable": {
-    "/pustaka/4.84fd5aca75ab7151e6bc.js": "ecb061a155e1c390a43b611f6f7f59fc7d50a15d",
+    "/pustaka/4.be0733f5dceec44d4abe.js": "86e59e1fef9e97723d947b0569930101059c5e77",
     "/pustaka/assets/icons/icon-128x128.png": "7369832f9500d42fbfd8d5bf66414af90038eedf",
     "/pustaka/assets/icons/icon-144x144.png": "bea7f007af7aae03c0fe1e68376183045e24c464",
     "/pustaka/assets/icons/icon-152x152.png": "8563413c500d95bf98d5a18b70ce6216f44b64e7",
@@ -81,11 +81,11 @@
     "/pustaka/assets/icons/icon-72x72.png": "bca1384956318cda0e894219f7f830f1e747dc3f",
     "/pustaka/assets/icons/icon-96x96.png": "7b7fd455d294d81f03604fa416710ab88f989739",
     "/pustaka/favicon.ico": "32ad2f69ac24b0962de404cd5e1ecfb7857f0cc7",
-    "/pustaka/index.html": "789912ceaeaed712e7d28c9558fd20bc5606e33d",
-    "/pustaka/main.aff79318a1ae5818a2af.js": "cf060edfa34544f893150a2246c24b4f8d213617",
+    "/pustaka/index.html": "7a24f705dec7800608c80d876d33d72b2ab9bd16",
+    "/pustaka/main.7d8b7f77c42754db1899.js": "ba1a6aba216e435df5949ac4f44e982581c139e3",
     "/pustaka/manifest.webmanifest": "2ca7931a7333cba504b90c7fbb628d4ba9255809",
     "/pustaka/polyfills.35a5ca1855eb057f016a.js": "578360d24ce37383f261c7ef63b1f822d28e8dde",
-    "/pustaka/runtime.4d037b7b5457846ba745.js": "7956b04e760ceeadc74a36dbb39f2bf9f86b0374",
+    "/pustaka/runtime.f7c961f9aaeb356eced9.js": "54c16c2507342dadf4ceacaaa1828b0cced5c884",
     "/pustaka/styles.4154e53e924fd7329071.css": "f7b7e3bc5642549f6800a23a347f16f75ae511ea"
   },
   "navigationUrls": [
