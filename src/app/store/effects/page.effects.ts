@@ -30,7 +30,7 @@ export class PageEffects {
             p.number === action.payload.page
         );
         if (p) {
-          return of(new GetPageSuccessAction(pages));
+          return of(new GetPageSuccessAction());
         }
       }
       return this.service.get_json(action.payload).pipe(

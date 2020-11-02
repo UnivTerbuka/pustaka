@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { State } from '../store/reducers';
 import { Buku } from '../store/models/buku';
 import { DeleteBukuAction } from '../store/actions/buku.actions';
+import { DeletePageAction } from '../store/actions/page.actions';
 
 @Component({
   selector: 'buku-card',
@@ -18,5 +19,8 @@ export class BukuCardComponent implements OnInit {
 
   delete() {
     this.store.dispatch(new DeleteBukuAction(this.buku.id));
+    this.store.dispatch(
+      new DeletePageAction({ id: this.buku.id, modul: '', page: 0 })
+    );
   }
 }

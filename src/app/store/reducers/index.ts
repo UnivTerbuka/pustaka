@@ -17,7 +17,7 @@ export const reducers: ActionReducerMap<State> = {
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
-  return localStorageSync({ keys: ['pustaka'] })(reducer);
+  return localStorageSync({ keys: ['buku', 'page'], rehydrate: true })(reducer);
 }
 
 export const metaReducers: MetaReducer<State>[] = !environment.production

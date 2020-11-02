@@ -6,7 +6,8 @@ export enum PageActionTypes {
   GET_PAGE = '[Page] Get Page',
   GET_PAGE_SUCCESS = '[Page] Get Page Success',
   GET_PAGE_FAILURE = '[Page] Get Page Failure',
-  CHANGE_PAGE = '[Buku] Change Page',
+  CHANGE_PAGE = '[Page] Change Page',
+  DELETE_PAGE = '[Page] Delete Page',
 }
 
 export class GetPageAction implements Action {
@@ -29,8 +30,14 @@ export class ChangePageAction implements Action {
   constructor(public payload: PageInfo) {}
 }
 
+export class DeletePageAction implements Action {
+  readonly type = PageActionTypes.DELETE_PAGE;
+  constructor(public payload: PageInfo) {}
+}
+
 export type PageAction =
   | GetPageAction
   | GetPageSuccessAction
   | GetPageFailureAction
-  | ChangePageAction;
+  | ChangePageAction
+  | DeletePageAction;

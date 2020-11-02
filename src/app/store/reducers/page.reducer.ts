@@ -33,6 +33,13 @@ export function PageReducer(
       return { ...state, error: action.payload, loading: false };
     case PageActionTypes.CHANGE_PAGE:
       return { ...state, current: action.payload };
+    case PageActionTypes.DELETE_PAGE:
+      let dp = action.payload;
+      return {
+        ...state,
+        list: state.list.filter((p) => p.id !== dp.id),
+        current: state.current.id !== dp.id ? state.current : undefined,
+      };
     default:
       return { ...state };
   }
