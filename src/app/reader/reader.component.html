@@ -1,7 +1,7 @@
 <mat-progress-bar mode="determinate" [value]="completion"></mat-progress-bar>
 <div style="display: flex; justify-content: center">
   <mat-spinner style="margin-top: 50px" *ngIf="loading$ | async"></mat-spinner>
-  <mat-card *ngFor="let p of pages$ | async">
+  <mat-card *ngFor="let p of pages$ | async" style="overflow: auto">
     <mat-card-content [style.width.px]="p.width" [style.height.px]="p.height">
       <span
         *ngFor="let text of p.text; index as i"
