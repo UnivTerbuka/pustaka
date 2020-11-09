@@ -2,8 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { State } from '../store/reducers';
 import { Buku } from '../store/models/buku';
-import { DeleteBukuAction } from '../store/actions/buku.actions';
-import { DeletePageAction } from '../store/actions/page.actions';
+import { deleteBukuAction } from '../store/actions/buku.actions';
+import { deletePageAction } from '../store/actions/page.actions';
+import { PageInfo } from '../store/models/page-info';
 
 @Component({
   selector: 'buku-card',
@@ -18,9 +19,9 @@ export class BukuCardComponent implements OnInit {
   ngOnInit(): void {}
 
   delete() {
-    this.store.dispatch(new DeleteBukuAction(this.buku.id));
-    this.store.dispatch(
-      new DeletePageAction({ id: this.buku.id, modul: '', page: 0 })
-    );
+    let id = this.buku.id;
+    this.store.dispatch(deleteBukuAction({ id }));
+    let info: PageInfo = { id, modul: '', page: 0 };
+    this.store.dispatch(deletePageAction({ info }));
   }
 }
