@@ -17,6 +17,7 @@ import { PageState } from '../reducers/page.reducer';
 @Injectable()
 export class PageEffects {
   page$: Observable<PageState>;
+
   @Effect() getPage$ = this.actions$.pipe(
     ofType<GetPageAction>(PageActionTypes.GET_PAGE),
     mergeMap((action) => {
@@ -32,17 +33,18 @@ export class PageEffects {
         if (p) {
           return of(new GetPageSuccessAction());
         }
+      } else {
+        return this.service.get_json(action.payload).pipe(
+          map((page) => {
+            page.forEach((page) => {
+              page.id = action.payload.id;
+              page.modul = action.payload.modul;
+            });
+            return new GetPageSuccessAction(page);
+          }),
+          catchError((error) => of(new GetPageFailureAction(error)))
+        );
       }
-      return this.service.get_json(action.payload).pipe(
-        map((page) => {
-          page.forEach((page) => {
-            page.id = action.payload.id;
-            page.modul = action.payload.modul;
-          });
-          return new GetPageSuccessAction(page);
-        }),
-        catchError((error) => of(new GetPageFailureAction(error)))
-      );
     })
   );
   constructor(
