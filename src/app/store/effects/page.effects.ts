@@ -5,10 +5,9 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, take } from 'rxjs/operators';
 import { BukuService } from 'src/app/buku.service';
 import {
-  GetPageAction,
-  GetPageFailureAction,
-  GetPageSuccessAction,
-  PageActionTypes,
+  getPageAction,
+  getPageFailureAction,
+  getPageSuccessAction,
 } from '../actions/page.actions';
 import { Page } from '../models/page';
 import { State } from '../reducers';
@@ -19,30 +18,28 @@ export class PageEffects {
   page$: Observable<PageState>;
 
   @Effect() getPage$ = this.actions$.pipe(
-    ofType<GetPageAction>(PageActionTypes.GET_PAGE),
-    mergeMap((action) => {
+    ofType(getPageAction),
+    mergeMap(({ info }) => {
       let pages: Array<Page>;
       this.page$.pipe(take(1)).subscribe((p) => (pages = p.list));
       if (pages.length > 0) {
         let p = pages.find(
           (p) =>
-            p.id === action.payload.id &&
-            p.modul === action.payload.modul &&
-            p.number === action.payload.page
+            p.id === info.id && p.modul === info.modul && p.number === info.page
         );
         if (p) {
-          return of(new GetPageSuccessAction());
+          return of(getPageSuccessAction({ pages: [] }));
         }
       } else {
-        return this.service.get_json(action.payload).pipe(
-          map((page) => {
-            page.forEach((page) => {
-              page.id = action.payload.id;
-              page.modul = action.payload.modul;
+        return this.service.get_json(info).pipe(
+          map((pages) => {
+            pages.forEach((page) => {
+              page.id = info.id;
+              page.modul = info.modul;
             });
-            return new GetPageSuccessAction(page);
+            return getPageSuccessAction({ pages });
           }),
-          catchError((error) => of(new GetPageFailureAction(error)))
+          catchError((error) => of(getPageFailureAction({ error })))
         );
       }
     })
