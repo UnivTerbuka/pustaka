@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BukuService } from '../buku.service';
-import { ChangePageAction, GetPageAction } from '../store/actions/page.actions';
 import { Font, Page } from '../store/models/page';
 import { PageInfo } from '../store/models/page-info';
 import { State } from '../store/reducers';
+import { PageState } from '../store/reducers/page.reducer';
+import { getCurrentRouteState } from '../store/selectors/router.selector';
+import { changePageAction, getPageAction } from '../store/actions/page.actions';
 
 interface TextStyle {
   top: string | number;
@@ -19,6 +21,7 @@ interface TextStyle {
   color?: string;
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-reader',
   templateUrl: './reader.component.html',
@@ -31,31 +34,30 @@ export class ReaderComponent implements OnInit {
   pageEvent: PageEvent;
   pageInfo: PageInfo;
   fonts: Array<Font>;
-  pages$: Observable<Array<Page>>;
-  current$: Observable<PageInfo>;
   loading$: Observable<boolean>;
-  error$: Observable<string>;
+  pages$: Observable<Array<Page>>;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private router: Router,
     private store: Store<State>,
     private service: BukuService
   ) {}
 
   ngOnInit(): void {
-    this.pageInfo = {
-      id: this.activatedRoute.snapshot.paramMap.get('id'),
-      modul: this.activatedRoute.snapshot.paramMap.get('modul'),
-      page: Number(this.activatedRoute.snapshot.paramMap.get('page')),
-    };
-    this.store.dispatch(new ChangePageAction(this.pageInfo));
-    this.store.dispatch(new GetPageAction(this.pageInfo));
-    this.current$ = this.store.select((store) => store.page.current);
     this.loading$ = this.store.select((store) => store.page.loading);
-    this.error$ = this.store.select((store) => store.page.error);
-    this.pages$ = this.service.get_page(this.pageInfo);
-    this.fonts = this.service.get_fonts(this.pageInfo);
+    this.store
+      .pipe(select(getCurrentRouteState), untilDestroyed(this))
+      .subscribe((route: any) => {
+        this.pageInfo = {
+          id: route.params.id,
+          modul: route.params.modul,
+          page: Number(route.params.page),
+        };
+        this.store.dispatch(changePageAction({ info: this.pageInfo }));
+        this.store.dispatch(getPageAction({ info: this.pageInfo }));
+        this.pages$ = this.service.get_page(this.pageInfo);
+        this.fonts = this.service.get_fonts(this.pageInfo);
+      });
   }
 
   pageEventHandler(event?: PageEvent) {
@@ -67,16 +69,8 @@ export class ReaderComponent implements OnInit {
       '/read',
       this.pageInfo.id,
       this.pageInfo.modul,
-      event.pageIndex + 1,
+      this.pageInfo.page,
     ]);
-    let page = this.service.get_page(this.pageInfo);
-    if (page) {
-      this.pages$ = page;
-      this.fonts = this.service.get_fonts(this.pageInfo);
-    } else {
-      this.ngOnInit();
-    }
-    this.store.dispatch(new ChangePageAction(this.pageInfo));
     return event;
   }
 

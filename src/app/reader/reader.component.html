@@ -1,27 +1,19 @@
 <mat-progress-bar mode="determinate" [value]="completion"></mat-progress-bar>
 <div style="display: flex; justify-content: center">
-  <mat-spinner style="margin-top: 50px" *ngIf="loading$ | async"></mat-spinner>
-  <mat-card *ngFor="let p of pages$ | async" style="overflow: auto">
-    <mat-card-content [style.width.px]="p.width" [style.height.px]="p.height">
-      <span
-        *ngFor="let text of p.text; index as i"
-        id="text_{{ i }}"
-        style="position: absolute"
-        [style]="getStyle(text)"
-      >
-        {{ text[5] }}
-      </span>
-    </mat-card-content>
-    <mat-card-actions>
-      <mat-paginator
-        #paginator
-        [length]="p.pages"
-        [pageSize]="1"
-        [pageIndex]="pageInfo.page - 1"
-        [hidePageSize]="true"
-        (page)="pageEventHandler($event)"
-      >
-      </mat-paginator>
-    </mat-card-actions>
-  </mat-card>
+  <mat-spinner style="margin-top: 50px" *ngIf="loading$|async; else reader"></mat-spinner>
+  <ng-template #reader>
+    <mat-card *ngFor="let p of pages$ | async" style="overflow: auto">
+      <mat-card-content [style.width.px]="p.width" [style.height.px]="p.height">
+        <span *ngFor="let text of p.text; index as i" id="text_{{ i }}" style="position: absolute"
+          [style]="getStyle(text)">
+          {{ text[5] }}
+        </span>
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-paginator #paginator [length]="p.pages" [pageSize]="1" [pageIndex]="pageInfo.page - 1"
+          [hidePageSize]="true" (page)="pageEventHandler($event)">
+        </mat-paginator>
+      </mat-card-actions>
+    </mat-card>
+  </ng-template>
 </div>
