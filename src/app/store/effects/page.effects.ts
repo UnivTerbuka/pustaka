@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
-import { catchError, map, mergeMap, take } from 'rxjs/operators';
+import { catchError, map, mergeMap, take, tap } from 'rxjs/operators';
 import { BukuService } from 'src/app/buku.service';
 import {
   getPageAction,
@@ -21,7 +21,12 @@ export class PageEffects {
     ofType(getPageAction),
     mergeMap(({ info }) => {
       let pages: Array<Page>;
-      this.page$.pipe(take(1)).subscribe((p) => (pages = p.list));
+      this.page$
+        .pipe(
+          take(1),
+          tap((state) => (pages = state.list))
+        )
+        .subscribe();
       if (pages.length > 0) {
         let p = pages.find(
           (p) =>
@@ -30,18 +35,17 @@ export class PageEffects {
         if (p) {
           return of(getPageSuccessAction({ pages: [] }));
         }
-      } else {
-        return this.service.get_json(info).pipe(
-          map((pages) => {
-            pages.forEach((page) => {
-              page.id = info.id;
-              page.modul = info.modul;
-            });
-            return getPageSuccessAction({ pages });
-          }),
-          catchError((error) => of(getPageFailureAction({ error })))
-        );
       }
+      return this.service.get_json(info).pipe(
+        map((pages) => {
+          pages.forEach((page) => {
+            page.id = info.id;
+            page.modul = info.modul;
+          });
+          return getPageSuccessAction({ pages });
+        }),
+        catchError((error) => of(getPageFailureAction({ error })))
+      );
     })
   );
   constructor(
