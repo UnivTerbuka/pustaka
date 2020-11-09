@@ -1,4 +1,10 @@
-import { BukuAction, BukuActionTypes } from '../actions/buku.actions';
+import { createReducer, on } from '@ngrx/store';
+import {
+  deleteBukuAction,
+  getBukuAction,
+  getBukuFailureAction,
+  getBukuSuccessAction,
+} from '../actions/buku.actions';
 import { Buku } from '../models/buku';
 
 export interface BukuState {
@@ -7,33 +13,27 @@ export interface BukuState {
   error?: string;
 }
 
-const initialState: BukuState = {
+const initialBukuState: BukuState = {
   list: [],
   loading: false,
   error: undefined,
 };
 
-export function BukuReducer(
-  state: BukuState = initialState,
-  action: BukuAction
-) {
-  switch (action.type) {
-    case BukuActionTypes.GET_BUKU:
-      return { ...state, loading: true };
-    case BukuActionTypes.GET_BUKU_SUCCESS:
-      return {
-        loading: false,
-        list: [...state.list, action.payload],
-        error: undefined,
-      };
-    case BukuActionTypes.GET_BUKU_FAILURE:
-      return { ...state, error: action.payload, loading: false };
-    case BukuActionTypes.DELETE_BUKU:
-      return {
-        ...state,
-        list: state.list.filter((item) => item.id !== action.payload),
-      };
-    default:
-      return { ...state };
-  }
-}
+export const bukuReducer = createReducer(
+  initialBukuState,
+  on(getBukuAction, (state) => ({ ...state, loading: true })),
+  on(getBukuSuccessAction, (state, { buku }) => ({
+    ...state,
+    list: [buku, ...state.list],
+    loading: false,
+  })),
+  on(getBukuFailureAction, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false,
+  })),
+  on(deleteBukuAction, (state, { id }) => ({
+    ...state,
+    list: state.list.filter((item) => item.id !== id),
+  }))
+);

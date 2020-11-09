@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { GetBukuAction } from '../store/actions/buku.actions';
+import { getBukuAction } from '../store/actions/buku.actions';
 import { State } from '../store/reducers';
 
 @Component({
@@ -18,7 +18,8 @@ export class SearchBukuComponent implements OnInit {
     this.error = this.store.select((state) => state.buku.error);
   }
   submit() {
-    this.store.dispatch(new GetBukuAction(this.buku.value.toUpperCase()));
+    let id = this.buku.value.toUpperCase();
+    this.store.dispatch(getBukuAction({ id }));
     this.buku.setValue('');
   }
 }

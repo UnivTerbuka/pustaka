@@ -4,20 +4,19 @@ import { of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { BukuService } from 'src/app/buku.service';
 import {
-  BukuActionTypes,
-  GetBukuAction,
-  GetBukuFailureAction,
-  GetBukuSuccessAction,
+  getBukuAction,
+  getBukuFailureAction,
+  getBukuSuccessAction,
 } from '../actions/buku.actions';
 
 @Injectable()
 export class BukuEffects {
   @Effect() getBuku$ = this.actions$.pipe(
-    ofType<GetBukuAction>(BukuActionTypes.GET_BUKU),
-    mergeMap((data) =>
-      this.service.get(data.payload).pipe(
-        map((buku) => new GetBukuSuccessAction(buku)),
-        catchError((error) => of(new GetBukuFailureAction(error)))
+    ofType(getBukuAction),
+    mergeMap(({ id }) =>
+      this.service.get(id).pipe(
+        map((buku) => getBukuSuccessAction({ buku })),
+        catchError((error) => of(getBukuFailureAction({ error })))
       )
     )
   );
