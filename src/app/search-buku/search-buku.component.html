@@ -1,20 +1,15 @@
-<form class="buku-form-field">
-  <input
-    matInput
-    placeholder="Kode Buku"
-    type="text"
-    [formControl]="field"
-    (submit)="submit()"
-  />
-  <button
-    *ngIf="field.value"
-    matSuffix
-    aria-label="Clear"
-    (click)="field.setValue('')"
-  >
-    <mat-icon>close</mat-icon>
+<div>
+  <mat-form-field>
+    <mat-label>Kode Buku</mat-label>
+    <input matInput #input [formControl]="buku" required (submit)="submit()">
+    <button mat-icon-button *ngIf="buku.value" (click)="buku.value=''" [attr.aria-label]="'Reset'">
+      <mat-icon>delete</mat-icon>
+    </button>
+    <mat-error *ngIf="buku.hasError('required')">Kode buku wajib diisi</mat-error>
+    <mat-error *ngIf="buku.hasError('pattern')">Kode buku tidak valid</mat-error>
+    <mat-error *ngIf="error|async">Error buku tidak ditemukan di rbv</mat-error>
+  </mat-form-field>
+  <button mat-button *ngIf="buku.value && buku.valid" (click)="submit()">
+    Cari
   </button>
-  <button mat-button *ngIf="field.value && field.valid" (click)="submit()">
-    <mat-icon>search</mat-icon>
-  </button>
-</form>
+</div>

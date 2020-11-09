@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { GetBukuAction } from '../store/actions/buku.actions';
 import { State } from '../store/reducers';
 
@@ -10,11 +11,14 @@ import { State } from '../store/reducers';
   styleUrls: ['./search-buku.component.css'],
 })
 export class SearchBukuComponent implements OnInit {
-  field = new FormControl('', Validators.pattern('^[a-zA-Z]{4}[0-9]{4,6}'));
+  error: Observable<string>;
+  buku = new FormControl('', Validators.pattern('^[a-zA-Z]{4}[0-9]{4,6}'));
   constructor(private store: Store<State>) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.error = this.store.select((state) => state.buku.error);
+  }
   submit() {
-    this.store.dispatch(new GetBukuAction(this.field.value.toUpperCase()));
-    this.field.setValue('');
+    this.store.dispatch(new GetBukuAction(this.buku.value.toUpperCase()));
+    this.buku.setValue('');
   }
 }
