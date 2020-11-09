@@ -31,6 +31,7 @@ import { BukuEffects } from './store/effects/buku.effects';
 import { PageEffects } from './store/effects/page.effects';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { CustomSerializer } from './store/router/serializer';
 
 const material = [
   MatToolbarModule,
@@ -72,7 +73,7 @@ const material = [
       maxAge: 25,
       logOnly: environment.production,
     }),
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
