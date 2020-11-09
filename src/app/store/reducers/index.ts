@@ -3,7 +3,7 @@ import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { environment } from '../../../environments/environment';
 import { bukuReducer, BukuState } from './buku.reducer';
-import { PageReducer, PageState } from './page.reducer';
+import { pageReducer, PageState } from './page.reducer';
 
 export interface State {
   readonly buku: BukuState;
@@ -13,7 +13,7 @@ export interface State {
 
 export const reducers: ActionReducerMap<State> = {
   buku: bukuReducer,
-  page: PageReducer,
+  page: pageReducer,
   router: routerReducer,
 };
 
