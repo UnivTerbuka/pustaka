@@ -40,7 +40,6 @@ export class AppComponent implements OnInit {
       modul: this.activatedRoute.snapshot.queryParams.modul,
       page: Number(this.activatedRoute.snapshot.queryParams.page),
     };
-    console.log(options);
     if (options && options.id && options.modul && options.page) {
       this.router.navigate(['read', options.id, options.modul, options.page]);
     }
