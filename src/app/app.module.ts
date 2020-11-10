@@ -32,6 +32,7 @@ import { PageEffects } from './store/effects/page.effects';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { CustomSerializer } from './store/router/serializer';
+import { MatMenuModule } from '@angular/material/menu';
 
 const material = [
   MatToolbarModule,
@@ -47,6 +48,7 @@ const material = [
   MatButtonModule,
   MatExpansionModule,
   MatProgressSpinnerModule,
+  MatMenuModule,
 ];
 
 @NgModule({
