@@ -2,7 +2,6 @@
   display: flexbox;
   justify-content: center;
   position: relative;
-  overflow: hidden;
 }
 
 .form-field {
