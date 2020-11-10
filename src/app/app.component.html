@@ -29,11 +29,13 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>{{ (currentPage$ | async)?.id || "Pustaka" }}</span>
-      <div *ngIf="(currentPage$ | async)?.modul">
-        <span> | </span>
-        <button mat-icon-button aria-label="Modul">
-          {{ (currentPage$ | async).modul }}
+      <span>Pustaka</span>
+      <div *ngIf="currentPage$ | async as cp">
+        <button mat-button aria-label="Buku">
+          {{ cp.id }}
+        </button>
+        <button mat-button aria-label="Modul">
+          {{ cp.modul }}
         </button>
       </div>
 

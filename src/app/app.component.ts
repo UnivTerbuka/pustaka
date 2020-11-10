@@ -13,15 +13,14 @@ import { LocationStrategy } from '@angular/common';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'pustaka';
   currentPage$: Observable<PageInfo>;
+  loading$: Observable<boolean>;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
       map((result) => result.matches),
       shareReplay()
     );
-  loading$: Observable<boolean>;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
