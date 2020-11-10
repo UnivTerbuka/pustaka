@@ -1,0 +1,15 @@
+.card-actions {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.form-field {
+  display: inline-block;
+}
+
+.paginator {
+  display: inline;
+  float: inline-end;
+  position: absolute;
+}

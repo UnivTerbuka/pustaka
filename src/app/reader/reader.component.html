@@ -16,8 +16,8 @@
           {{ text[5] }}
         </span>
       </mat-card-content>
-      <mat-card-actions>
-        <mat-form-field>
+      <mat-card-actions class="card-actions">
+        <mat-form-field class="form-field">
           <mat-label>Halaman</mat-label>
           <mat-select
             [formControl]="halaman"
@@ -31,6 +31,7 @@
         </mat-form-field>
         <mat-paginator
           #paginator
+          class="paginator"
           [length]="p.pages"
           [pageSize]="1"
           [pageIndex]="pageInfo.page - 1"
