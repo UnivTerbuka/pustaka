@@ -29,7 +29,6 @@ interface TextStyle {
   styleUrls: ['./reader.component.css'],
 })
 export class ReaderComponent implements OnInit, OnDestroy {
-  completion: number = 0;
   init: boolean = false;
   halaman = new FormControl(0);
 
@@ -63,6 +62,10 @@ export class ReaderComponent implements OnInit, OnDestroy {
           this.halaman.setValue(this.pageInfo.page);
         }
       });
+  }
+
+  completion(page: number, pages: number): number {
+    return Number((page / pages) * 100);
   }
 
   public pages(n: number): Array<number> {

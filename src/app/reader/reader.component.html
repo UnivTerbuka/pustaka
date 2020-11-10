@@ -1,4 +1,3 @@
-<mat-progress-bar mode="determinate" [value]="completion"></mat-progress-bar>
 <div style="display: flex; justify-content: center">
   <mat-spinner
     style="margin-top: 50px"
@@ -6,6 +5,12 @@
   ></mat-spinner>
   <ng-template #reader>
     <mat-card *ngFor="let p of pages$ | async" style="overflow: auto">
+      <mat-card-header>
+        <mat-progress-bar
+          mode="determinate"
+          [value]="completion(pageInfo.page, p.pages)"
+        ></mat-progress-bar>
+      </mat-card-header>
       <mat-card-content [style.width.px]="p.width" [style.height.px]="p.height">
         <span
           *ngFor="let text of p.text; index as i"

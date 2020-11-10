@@ -1,10 +1,12 @@
 .card-actions {
+  display: flexbox;
+  justify-content: center;
   position: relative;
   overflow: hidden;
-  white-space: nowrap;
 }
 
 .form-field {
+  padding-left: 5px;
   display: inline-block;
 }
 
