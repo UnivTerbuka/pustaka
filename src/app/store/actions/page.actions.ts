@@ -19,7 +19,7 @@ export const getPageFailureAction = createAction(
 
 export const changePageAction = createAction(
   '[Page] Change Page',
-  props<{ info: PageInfo }>()
+  props<{ info?: PageInfo }>()
 );
 
 export const deletePageAction = createAction(

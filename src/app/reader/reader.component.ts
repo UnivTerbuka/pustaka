@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
@@ -8,7 +8,6 @@ import { BukuService } from '../buku.service';
 import { Font, Page } from '../store/models/page';
 import { PageInfo } from '../store/models/page-info';
 import { State } from '../store/reducers';
-import { PageState } from '../store/reducers/page.reducer';
 import { getCurrentRouteState } from '../store/selectors/router.selector';
 import { changePageAction, getPageAction } from '../store/actions/page.actions';
 
@@ -27,7 +26,7 @@ interface TextStyle {
   templateUrl: './reader.component.html',
   styleUrls: ['./reader.component.css'],
 })
-export class ReaderComponent implements OnInit {
+export class ReaderComponent implements OnInit, OnDestroy {
   init: boolean = false;
   completion: number = 0;
 
@@ -58,6 +57,10 @@ export class ReaderComponent implements OnInit {
         this.pages$ = this.service.get_page(this.pageInfo);
         this.fonts = this.service.get_fonts(this.pageInfo);
       });
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(changePageAction({ info: null }));
   }
 
   pageEventHandler(event?: PageEvent) {
