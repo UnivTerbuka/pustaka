@@ -10,6 +10,8 @@ import { PageInfo } from '../store/models/page-info';
 import { State } from '../store/reducers';
 import { getCurrentRouteState } from '../store/selectors/router.selector';
 import { changePageAction, getPageAction } from '../store/actions/page.actions';
+import { FormControl } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 
 interface TextStyle {
   top: string | number;
@@ -27,8 +29,9 @@ interface TextStyle {
   styleUrls: ['./reader.component.css'],
 })
 export class ReaderComponent implements OnInit, OnDestroy {
-  init: boolean = false;
   completion: number = 0;
+  init: boolean = false;
+  halaman = new FormControl(0);
 
   pageEvent: PageEvent;
   pageInfo: PageInfo;
@@ -56,7 +59,16 @@ export class ReaderComponent implements OnInit, OnDestroy {
         this.store.dispatch(getPageAction({ info: this.pageInfo }));
         this.pages$ = this.service.get_page(this.pageInfo);
         this.fonts = this.service.get_fonts(this.pageInfo);
+        if (this.pageInfo?.page) {
+          this.halaman.setValue(this.pageInfo.page);
+        }
       });
+  }
+
+  public pages(n: number): Array<number> {
+    return Array(n)
+      .fill(1)
+      .map((v, i) => v + i);
   }
 
   ngOnDestroy(): void {
@@ -68,13 +80,27 @@ export class ReaderComponent implements OnInit, OnDestroy {
       ...this.pageInfo,
       page: event.pageIndex + 1,
     };
+    this.changePage();
+    return event;
+  }
+
+  selectEventHandler(event?: MatSelectChange) {
+    console.log(event);
+    this.pageInfo = {
+      ...this.pageInfo,
+      page: Number(event.value),
+    };
+    this.changePage();
+    return event;
+  }
+
+  changePage(page?: number): void {
     this.router.navigate([
       '/read',
       this.pageInfo.id,
       this.pageInfo.modul,
-      this.pageInfo.page,
+      page || this.pageInfo.page,
     ]);
-    return event;
   }
 
   getStyle(text: Array<number | string>): TextStyle {

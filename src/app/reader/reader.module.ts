@@ -7,6 +7,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { ReaderRoutingModule } from './reader-routing.module';
 import { ReaderComponent } from './reader.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ReaderComponent],
@@ -17,6 +20,10 @@ import { ReaderComponent } from './reader.component';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
   ],
 })
 export class ReaderModule {}
